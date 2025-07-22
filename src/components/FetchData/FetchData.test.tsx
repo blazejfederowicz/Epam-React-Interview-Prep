@@ -1,17 +1,18 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import FetchData from './FetchData';
+import { vi } from 'vitest';
 
 beforeEach(() => {
-  global.fetch = jest.fn(() =>
+  global.fetch = vi.fn(() =>
     Promise.resolve({
         ok: true,
         status: 200,
-        json: () => Promise.resolve([{ id: 1, name: 'Item 1' }]),
+        json: () => Promise.resolve([{ id: 2, title: 'qui est esse' }]),
     } as Response)
   );
 });
 
 test('fetches and displays data', async () => {
   render(<FetchData />);
-  await waitFor(() => expect(screen.getByText('Item 1')).toBeInTheDocument());
+  expect(await screen.findByText(/qui est esse/i)).toBeInTheDocument();
 });

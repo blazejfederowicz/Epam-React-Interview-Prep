@@ -60,3 +60,13 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button:disabled{
+  background-color: rgb(77, 77, 77);
+}
+
+button:disabled:hover{
+  border-color: transparent;
+}
+
+
+

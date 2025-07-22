@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 import Counter from './components/Counter/Counter'
 import DarkModeToggle from './components/DarkModeToggle/DarkModeToggle'
@@ -11,6 +12,8 @@ import SearchFilter from './components/SearchFilter/SearchFilter'
 import ToggleButton from './components/ToggleButton/ToggleButton'
 
 function App() {
+  const [page, setPage] = useState<number>(1)
+  const items = ['apple', 'banana', 'cherry']
 
   return (
     <>
@@ -19,14 +22,14 @@ function App() {
         <p>This is a simple React application.</p>
       </header>
       <main>
-        <List items={['Apple', 'Banana', 'Cherry']} />
+        <List items={items} />
         <Form />
         <FetchData />
         <Counter />
         <ToggleButton />
         <Modal/>
-        <SearchFilter items={['apple', 'banana', 'cherry']} />
-        <Pagination currentPage={1} totalPages={3} onPageChange={(page) => console.log(`Page changed to: ${page}`)} />
+        <SearchFilter items={items} />
+        <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />
         <DragDrop />
         <DarkModeToggle />
       </main>
