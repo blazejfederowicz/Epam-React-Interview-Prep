@@ -1,21 +1,35 @@
 import { useState } from "react";
+import './style.css'
 
 export default function DragDrop() {
-  const [dropped, setDropped] = useState(false);
+  const [items, setItems] = useState<string[]>([]);
 
-  const handleDragOver = (event:any)=> event.preventDefault()
-  const handleDrop = (event:any)=>{
+  const handleDrag = (event:React.DragEvent<HTMLElement>)=>{
+    event.dataTransfer.setData("widgetType", event.currentTarget.outerText)
+  }
+  const handleDragOver = (event:React.DragEvent)=> event.preventDefault()
+  const handleDrop = (event: React.DragEvent)=>{
     event.preventDefault()
 
-    setDropped(true)
+    const widget = event.dataTransfer.getData("widgetType") 
+
+    setItems([...items, widget])
   }
 
   return (
-    <div>
+    <div className="main">
       <h1>Drag and drop Component</h1>
-      {/* Dark mode toggle logic will go here */}
-      <div onDrop={handleDrop} onDragOver={handleDragOver} data-testid="drag-drop-area" style={{width:"100%", height:"100px", backgroundColor:"yellow"}}>
-        {dropped ? 'Item Dropped!' : 'Drag item here'}
+      <div className="container">
+        <div draggable className="widget after" onDragStart={handleDrag}>Item-A</div>
+        <div draggable className="widget after" onDragStart={handleDrag}>Item-B</div>
+        <div draggable className="widget after" onDragStart={handleDrag}>Item-C</div>
+      </div>
+      <div onDrop={handleDrop} onDragOver={handleDragOver} data-testid="drag-drop-area" className="container border">
+        {items.map((e,i)=>(
+          <div key={i} className="widget">
+            {e}
+          </div>
+        ))}
       </div>
     </div>
   );
