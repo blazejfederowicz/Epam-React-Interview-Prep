@@ -3,8 +3,8 @@ import { useState } from "react";
 export default function DragDrop() {
   const [dropped, setDropped] = useState(false);
 
-  const handleDragOver = (event)=> event.preventDefault()
-  const handleDrop = (event)=>{
+  const handleDragOver = (event:any)=> event.preventDefault()
+  const handleDrop = (event:any)=>{
     event.preventDefault()
 
     setDropped(true)
