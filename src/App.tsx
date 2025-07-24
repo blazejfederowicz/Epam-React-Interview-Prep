@@ -10,6 +10,7 @@ import Modal from './components/Modal/Modal'
 import Pagination from './components/Pagination/Pagination'
 import SearchFilter from './components/SearchFilter/SearchFilter'
 import ToggleButton from './components/ToggleButton/ToggleButton'
+import ToDoList from './components/ToDoList/ToDoList'
 
 function App() {
   const [page, setPage] = useState<number>(1)
@@ -32,6 +33,7 @@ function App() {
         <Pagination currentPage={page} totalPages={5} onPageChange={setPage} />
         <DragDrop />
         <DarkModeToggle />
+        <ToDoList/>
       </main>
     </>
   )
